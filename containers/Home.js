@@ -10,15 +10,37 @@ import {
     View,
   } from 'react-native';
 
-const Home = ({route, navigation}) => {
+import Profile from './Profile'
 
-    const {text} = route.params;
+const Home = ({navigation}) => {
+
+    const [userData, setUserData] = useState(null)
+    const [userLoading, setUserLoading] = useState(true)
+
+    const loadUserData = function(userId){
+        fetch('http://10.0.2.2:8080/users/' + userId.toString() + '/')
+        .then((response) => response.json())
+        .then((json)=> setUserData(json))
+        .catch((error) => alert(error))
+        .finally(setUserLoading(false))
+    }
+
+    useEffect(() => {
+        loadUserData(1)
+    }, [])
 
     return(
-        <SafeAreaView>
-            <Text>{text}</Text>
-            <Text>HOME SCREEN MATE</Text>
-        </SafeAreaView>
+        <View>
+            { userData === null ? 
+            <SafeAreaView>
+                <Text>Loading...</Text>
+            </SafeAreaView>
+            :
+            <SafeAreaView>
+                <Profile props={userData}></Profile>
+            </SafeAreaView>
+            }
+        </View>
     )
 }
 

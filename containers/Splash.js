@@ -7,7 +7,7 @@ const Splash = ({navigation}) => {
     return(
         <SafeAreaView>
             <Text>Splash Screen</Text>
-            <Button title="Continue" onPress={() => navigation.navigate("Home", {text: "It worked mate"})}></Button>
+            <Button title="Continue" onPress={() => navigation.navigate("Home")}></Button>
         </SafeAreaView>
     )
 }
