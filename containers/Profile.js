@@ -3,7 +3,6 @@ import {Dimensions, Text, TouchableOpacity, Feather, Image, View, SafeAreaView, 
 
 export default function Profile ({props}) {
 
-    console.log("================", props, "=========================")
     return(
             <View>
 
