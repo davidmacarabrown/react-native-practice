@@ -1,9 +1,9 @@
 import React from 'react';
-import {StyleSheet, ScrollView, View, FlatList, Text} from 'react-native';
+import {StyleSheet, View, FlatList, Text} from 'react-native';
 import colors from '../assets/colors/colors';
 import TaskItem from './TaskItem';
 
-const TaskList =  (props) => {
+const TaskList =  ({tasks, onPressFunction, onPressFunctionTwo, addTask}) => {
 
     const renderItem = ({item}) => {
 
@@ -11,8 +11,8 @@ const TaskList =  (props) => {
             <View>
             <TaskItem 
                 item={item}
-                markComplete={()=> props.onPressFunction(1, item.id)}
-                deleteTask={()=> props.onPressFunctionTwo(1, item.id)}
+                markComplete={()=> onPressFunction(1, item.id)}
+                deleteTask={()=> onPressFunctionTwo(1, item.id)}
                 />
             </View>
         )
@@ -21,7 +21,7 @@ const TaskList =  (props) => {
     return(
         <View style={Styles.tasksWrapper}>
                  <FlatList 
-                    data={props.tasks}
+                    data={tasks}
                     renderItem={renderItem}
                     keyExtractor={(item) => item.id}
                  />
@@ -32,7 +32,7 @@ const TaskList =  (props) => {
 const Styles = StyleSheet.create({
 
     tasksWrapper:{
-        paddingTop: 80,
+        paddingTop: 10,
         paddingHorizontal: 20,
         borderRadius:10,
         color:colors.primary,
@@ -45,7 +45,7 @@ const Styles = StyleSheet.create({
     },
     items:{
         marginTop:30,
-    },
+    }
 })
 
 export default TaskList;

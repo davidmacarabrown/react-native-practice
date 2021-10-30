@@ -20,20 +20,28 @@ const TaskItem = (props) => {
                                 <TouchableOpacity onPress={props.markComplete}>
                                         <Feather
                                             name="check-circle"
-                                            size={30 }
+                                            size={32}
                                             color={"#cc491e"} 
                                         />
                                 </TouchableOpacity> 
                                 :
                                 <Feather
                                         name="check"
-                                        size={30}
+                                        size={32}
                                         color={"#61cc1e"}
                                     />
                             }
+                            <TouchableOpacity>
+                                <Feather 
+                                    name="edit"
+                                    size={28}
+                                    color={'#f99a13'}
+                                />
+                            </TouchableOpacity>
+
                             <TouchableOpacity onPress={props.deleteTask}>
                                 <Feather name="x-circle"
-                                        size={30 }
+                                        size={28}
                                         color={"#b53833"}
                                             
                                 />

@@ -1,6 +1,7 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
 import {
+    ActivityIndicator,
     SafeAreaView,
     ScrollView,
     StatusBar,
@@ -16,17 +17,16 @@ import TaskList from '../components/TaskList'
 const Home = ({navigation}) => {
 
     const [userData, setUserData] = useState({})
-    const [userLoading, setUserLoading] = useState(true)
-
     const [taskData, setTaskData] = useState([])
-    const [tasksLoading, setTasksLoading] = useState(true)
+
+    const [newTaskName, setNewTaskName] = useState(null)
+    const [newTaskDescription, setNewTaskDescription] = useState(null)
 
     const loadUserData = function(userId){
         fetch('http://10.0.2.2:8080/users/' + userId.toString() + '/')
         .then((response) => response.json())
         .then((json)=> setUserData(json))
         .catch((error) => alert(error))
-        .finally(setUserLoading(false))
     }
 
     const loadTaskData = (userId) => {
@@ -34,7 +34,34 @@ const Home = ({navigation}) => {
         .then((response) => response.json())
         .then((json) => setTaskData(json))
         .catch((error) => alert(error))
-        .finally((setTasksLoading(false)))
+    }
+
+    const addTask = function(userId){
+
+        console.log(newTaskName, newTaskDescription)
+
+        const payload = {
+            "name": newTaskName,
+            "description": newTaskDescription
+        }
+
+        if (newTaskName && newTaskDescription){
+
+            fetch('http://10.0.2.2:8080/users/' + userId.toString() + '/tasks', {
+
+                method: 'POST',
+                headers: {"Content-Type": "application/json"},
+                body: JSON.stringify(payload)
+            })
+                .then((response) => response.json())
+                .then((json) => setTasks(json))
+
+                setNewTaskDescription(null)
+                setNewTaskName(null)
+
+            } else {
+                alert("Please complete all fields.")
+            }
     }
 
     const markComplete = function(userId, taskId){
@@ -66,21 +93,28 @@ const Home = ({navigation}) => {
 
     return(
         <View>
-        {console.log(userData, "======================================")}
-            { userLoading ? 
-            <SafeAreaView>
-                <Text>Loading...</Text>
-            </SafeAreaView>
-            :
-            <SafeAreaView>
-                <Profile props={userData}></Profile>
-            </SafeAreaView>
-            }
-            <View>
-                <TaskList tasks={taskData} onPressFunction={markComplete} onPressFunctionTwo={deleteTask}/>
-            </View>
+                { taskData.length === 0 || userData === {} ? 
+                <SafeAreaView style={styles.loadingIndicator}>
+                    <ActivityIndicator size="large" />
+                </SafeAreaView>
+                :
+                <SafeAreaView>
+                    <Profile props={userData}></Profile>
+                </SafeAreaView>
+                }
+                <SafeAreaView>
+                    <TaskList tasks={taskData} onPressFunction={markComplete} onPressFunctionTwo={deleteTask} addTask={addTask}/>
+                </SafeAreaView>
         </View>
     )
 }
 
 export default Home;
+
+const styles = StyleSheet.create({
+
+    loadingIndicator: {
+        alignContent: 'center',
+        paddingTop: '50%'
+    }
+})
