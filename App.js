@@ -22,6 +22,7 @@ import {
 
 import Home from './containers/Home';
 import Splash from './containers/Splash'
+import TaskForm from './components/TaskForm';
 
 const App = () => {
 
@@ -35,7 +36,7 @@ const App = () => {
               name="Splash"
               component={Splash}
               options = {{
-                headerShown:false,
+                headerShown:false
               }}
               />
             
@@ -43,8 +44,14 @@ const App = () => {
               name="Home"
               component={Home}
               options = {{
-                headerShown:false,
+                headerShown:false
               }}
+              />
+
+              <Stack.Screen
+              name="TaskForm"
+              component={TaskForm}
+              options={{headerShown: false}}
               />
               
             </Stack.Navigator>

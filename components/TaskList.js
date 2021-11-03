@@ -3,7 +3,7 @@ import {StyleSheet, View, FlatList, Text} from 'react-native';
 import colors from '../assets/colors/colors';
 import TaskItem from './TaskItem';
 
-const TaskList =  ({tasks, onPressFunction, onPressFunctionTwo, addTask}) => {
+const TaskList =  ({tasks, onPressFunction, onPressFunctionTwo}) => {
 
     const renderItem = ({item}) => {
 
@@ -11,8 +11,8 @@ const TaskList =  ({tasks, onPressFunction, onPressFunctionTwo, addTask}) => {
             <View>
             <TaskItem 
                 item={item}
-                markComplete={()=> onPressFunction(1, item.id)}
-                deleteTask={()=> onPressFunctionTwo(1, item.id)}
+                markComplete={()=> onPressFunction(item.id)}
+                deleteTask={()=> onPressFunctionTwo(item.id)}
                 />
             </View>
         )

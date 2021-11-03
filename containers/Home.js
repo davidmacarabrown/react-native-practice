@@ -2,6 +2,7 @@ import React from 'react';
 import { useState, useEffect } from 'react';
 import {
     ActivityIndicator,
+    Button,
     SafeAreaView,
     ScrollView,
     StatusBar,
@@ -19,24 +20,23 @@ const Home = ({navigation}) => {
     const [userData, setUserData] = useState({})
     const [taskData, setTaskData] = useState([])
 
-    const [newTaskName, setNewTaskName] = useState(null)
-    const [newTaskDescription, setNewTaskDescription] = useState(null)
+    const userId = 1;
 
-    const loadUserData = function(userId){
+    const loadUserData = function(){
         fetch('http://10.0.2.2:8080/users/' + userId.toString() + '/')
         .then((response) => response.json())
         .then((json)=> setUserData(json))
         .catch((error) => alert(error))
     }
 
-    const loadTaskData = (userId) => {
+    const loadTaskData = () => {
         fetch('http://10.0.2.2:8080/users/' + userId.toString() + '/tasks')
         .then((response) => response.json())
         .then((json) => setTaskData(json))
         .catch((error) => alert(error))
     }
 
-    const addTask = function(userId){
+    const addTask = function(){
 
         console.log(newTaskName, newTaskDescription)
 
@@ -64,7 +64,7 @@ const Home = ({navigation}) => {
             }
     }
 
-    const markComplete = function(userId, taskId){
+    const markComplete = function(taskId){
 
         const filter = (data) => {
             setUserData(data.user)
@@ -78,7 +78,7 @@ const Home = ({navigation}) => {
         .catch((error) => alert(error))
     };
 
-    const deleteTask = function(userId, taskId){
+    const deleteTask = function(taskId){
         fetch('http://10.0.2.2:8080/users/'+ userId.toString() +'/tasks/' + taskId.toString()+ '/', {
             method: 'DELETE'})
         .then((response) => response.json())
@@ -86,9 +86,32 @@ const Home = ({navigation}) => {
         .catch((error) => alert(error))
     }
 
+    const saveTask = (name, description) => {
+
+        console.log(name, description);
+
+        const payload = {
+            "name": name,
+            "description": description
+        }
+
+        if (name && description){
+
+            fetch('http://10.0.2.2:8080/users/' + id.toString() + '/tasks', {
+
+                method: 'POST',
+                headers: {"Content-Type": "application/json"},
+                body: JSON.stringify(payload)
+            })
+
+            } else {
+                alert("Please complete all fields.")
+            }
+    }
+
     useEffect(() => {
-        loadUserData(1)
-        loadTaskData(1)
+        loadUserData(userId)
+        loadTaskData(userId)
     }, [])
 
     return(
@@ -102,8 +125,11 @@ const Home = ({navigation}) => {
                     <Profile props={userData}></Profile>
                 </SafeAreaView>
                 }
+                <View>
+                    <Button title="Add Task" onPress={() => {navigation.navigate('TaskForm', {id: userData.id, save: addTask})}}/>
+                </View>
                 <SafeAreaView>
-                    <TaskList tasks={taskData} onPressFunction={markComplete} onPressFunctionTwo={deleteTask} addTask={addTask}/>
+                    <TaskList tasks={taskData} onPressFunction={markComplete} onPressFunctionTwo={deleteTask}/>
                 </SafeAreaView>
         </View>
     )
