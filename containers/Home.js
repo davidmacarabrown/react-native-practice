@@ -22,7 +22,7 @@ const Home = ({navigation}) => {
 
     const userId = 1;
 
-    const loadUserData = function(){
+    const loadUserData = () => {
         fetch('http://10.0.2.2:8080/users/' + userId.toString() + '/')
         .then((response) => response.json())
         .then((json)=> setUserData(json))
