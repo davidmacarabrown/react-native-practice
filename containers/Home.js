@@ -36,7 +36,7 @@ const Home = ({navigation}) => {
         .catch((error) => alert(error))
     }
 
-    const addTask = function(){
+    const addTask =() => {
 
         console.log(newTaskName, newTaskDescription)
 
@@ -64,7 +64,7 @@ const Home = ({navigation}) => {
             }
     }
 
-    const markComplete = function(taskId){
+    const markComplete = (taskId) => {
 
         const filter = (data) => {
             setUserData(data.user)
@@ -78,7 +78,7 @@ const Home = ({navigation}) => {
         .catch((error) => alert(error))
     };
 
-    const deleteTask = function(taskId){
+    const deleteTask = (taskId) => {
         fetch('http://10.0.2.2:8080/users/'+ userId.toString() +'/tasks/' + taskId.toString()+ '/', {
             method: 'DELETE'})
         .then((response) => response.json())

@@ -14,6 +14,10 @@ const TaskForm = ({navigation, route}) => {
         setTaskName("");
     }
 
+    const goHome = () => {
+        navigation.navigate('Home')
+    }
+
     const saveTask = () => {
        
         const payload = {
@@ -44,10 +48,6 @@ const TaskForm = ({navigation, route}) => {
             } else {
                 alert("Please complete all fields.")
             }
-    }
-
-    const goHome = () => {
-        navigation.navigate('Home')
     }
 
     return(
