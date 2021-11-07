@@ -26,14 +26,14 @@ const Home = ({navigation}) => {
         fetch('http://10.0.2.2:8080/users/' + userId.toString() + '/')
         .then((response) => response.json())
         .then((json)=> setUserData(json))
-        .catch((error) => alert(error))
+        .catch((error) => alert("Service Unavailable"))
     }
 
     const loadTaskData = () => {
         fetch('http://10.0.2.2:8080/users/' + userId.toString() + '/tasks')
         .then((response) => response.json())
         .then((json) => setTaskData(json))
-        .catch((error) => alert(error))
+        .catch((error) => console.error(error))
     }
 
     const markComplete = (taskId) => {
@@ -47,7 +47,7 @@ const Home = ({navigation}) => {
             method: 'PATCH'
         }).then((response) => response.json())
         .then((json) => filter(json))
-        .catch((error) => alert(error))
+        .catch((error) => alert("Service Unavailable"))
     };
 
     const deleteTask = (taskId) => {
@@ -55,7 +55,12 @@ const Home = ({navigation}) => {
             method: 'DELETE'})
         .then((response) => response.json())
         .then((json) => setTaskData(json))
-        .catch((error) => alert(error))
+        .catch((error) => alert("Service Unavailable"))
+    }
+
+    const refresh = () => {
+        loadUserData(userId)
+        loadTaskData(userId)
     }
 
     useEffect(() => {
@@ -68,18 +73,22 @@ const Home = ({navigation}) => {
                 { taskData.length === 0 || userData === {} ? 
                 <SafeAreaView style={styles.loadingIndicator}>
                     <ActivityIndicator size="large" />
+                    <Button title="Retry" onPress={refresh}/>
                 </SafeAreaView>
                 :
-                <SafeAreaView>
-                    <Profile props={userData}></Profile>
-                </SafeAreaView>
-                }
                 <View>
-                    <Button title="Add Task" onPress={() => {navigation.navigate('TaskForm', {id: userData.id})}}/>
+                    <SafeAreaView>
+                        <Profile props={userData}></Profile>
+                    </SafeAreaView>
+                    <View>
+                        <Button title="Add Task" onPress={() => {navigation.navigate('TaskForm', {id: userData.id})}}/>
+                    </View>
+                    <SafeAreaView>
+                        <TaskList tasks={taskData} onPressFunction={markComplete} onPressFunctionTwo={deleteTask}/>
+                    </SafeAreaView>
                 </View>
-                <SafeAreaView>
-                    <TaskList tasks={taskData} onPressFunction={markComplete} onPressFunctionTwo={deleteTask}/>
-                </SafeAreaView>
+                }
+                
         </View>
     )
 }
