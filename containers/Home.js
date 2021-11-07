@@ -66,26 +66,25 @@ const Home = ({navigation}) => {
     useEffect(() => {
         loadUserData(userId)
         loadTaskData(userId)
-    }, [])
+    }, [taskData])
 
     return(
         <View>
-                { taskData.length === 0 || userData === {} ? 
-                <SafeAreaView style={styles.loadingIndicator}>
+                {userData === {} ? 
+                <View style={styles.loadingIndicator}>
                     <ActivityIndicator size="large" />
                     <Button title="Retry" onPress={refresh}/>
-                </SafeAreaView>
+                </View>
                 :
                 <View>
-                    <SafeAreaView>
+
                         <Profile props={userData}></Profile>
-                    </SafeAreaView>
-                    <View>
+
                         <Button title="Add Task" onPress={() => {navigation.navigate('TaskForm', {id: userData.id})}}/>
-                    </View>
-                    <SafeAreaView>
-                        <TaskList tasks={taskData} onPressFunction={markComplete} onPressFunctionTwo={deleteTask}/>
-                    </SafeAreaView>
+
+                        <View>
+                            <TaskList tasks={taskData} onPressFunction={markComplete} onPressFunctionTwo={deleteTask}/>
+                        </View>
                 </View>
                 }
                 
