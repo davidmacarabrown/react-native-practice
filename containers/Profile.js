@@ -1,5 +1,6 @@
 import React from 'react';
 import {Dimensions, Text, TouchableOpacity, Feather, Image, View, SafeAreaView, StyleSheet, ImageBackground} from 'react-native';
+import colors from '../assets/colors/colors';
 
 export default function Profile ({props}) {
 
@@ -33,19 +34,21 @@ export default function Profile ({props}) {
 const styles = StyleSheet.create({
 
     profileWrapper:{
-        width: '95%',
-        height: '19%',
+        height: '20%',
         flexDirection: 'row',
-        alignItems: 'flex-start'
+        justifyContent: 'space-between',
+        backgroundColor:colors.secondary,
+        borderRadius:12,
+        margin: '3%'
     },
 
     avatarImage:{
         flex: 1,
-        resizeMode: 'center',
-        width: '100%',
-        height: '100%',
-        marginLeft: '4%',
-        marginRight: '4%'
+        resizeMode: 'contain',
+        width: '90%',
+        height: '90%',
+        marginTop: '2%',
+        borderRadius: 20
     },
 
     detailWrapper:{
@@ -58,21 +61,21 @@ const styles = StyleSheet.create({
         flex: 1,
         flexDirection: 'column',
         justifyContent: 'center',
-        alignItems: 'flex-start',
-        marginTop: '5%'
+        alignItems: 'center',
+        marginTop: '4%'
     },
     
     textSmall:{
         fontFamily:'Raleway-Bold',
         fontSize:18,
-        color:'purple',
+        color:'white',
         textAlign: 'center'
     },
 
     textLarge:{
         fontFamily:'Raleway-Bold',
         fontSize:32,
-        color:'purple',
+        color:'white',
         textAlign: 'center',
         marginBottom: '10%'
     }
