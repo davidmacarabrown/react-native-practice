@@ -31,14 +31,14 @@ const TaskList =  ({tasks, onPressFunction, onPressFunctionTwo}) => {
 const Styles = StyleSheet.create({
 
     tasksWrapper:{
-        paddingTop: 10,
-        paddingHorizontal: 20,
+        paddingTop: '1%',
+        paddingHorizontal: '5%',
         borderRadius:10,
         color:colors.primary,
     },
     
     items:{
-        marginTop:'5%',
+        marginTop:'3%',
     }
 })
 

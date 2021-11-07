@@ -2,7 +2,11 @@ import React from 'react';
 import {Dimensions, Text, TouchableOpacity, Feather, Image, View, SafeAreaView, StyleSheet, ImageBackground} from 'react-native';
 import colors from '../assets/colors/colors';
 
+const profileHeight = Dimensions.get("screen").height / 5
+
 export default function Profile ({props}) {
+
+    
 
     return(
             <View style={styles.profileWrapper}>
@@ -34,20 +38,24 @@ export default function Profile ({props}) {
 const styles = StyleSheet.create({
 
     profileWrapper:{
-        height: '20%',
+        height:profileHeight,
         flexDirection: 'row',
         justifyContent: 'space-between',
         backgroundColor:colors.secondary,
         borderRadius:12,
-        margin: '3%'
+        marginLeft: '6%',
+        marginRight: '6%',
+        marginTop: '6%',
+        marginBottom: '6%'
     },
 
     avatarImage:{
         flex: 1,
         resizeMode: 'contain',
-        width: '90%',
-        height: '90%',
-        marginTop: '2%',
+        width: '80%',
+        height: '80%',
+        marginTop: '5%',
+        marginLeft: '2%',
         borderRadius: 20
     },
 

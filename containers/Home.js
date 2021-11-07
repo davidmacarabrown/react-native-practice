@@ -8,6 +8,7 @@ import {
     StatusBar,
     StyleSheet,
     Text,
+    TouchableOpacity,
     useColorScheme,
     View,
   } from 'react-native';
@@ -78,10 +79,11 @@ const Home = ({navigation}) => {
                 </View>
                 :
                 <ScrollView>
+                        <Profile props={userData} />
 
-                        <Profile props={userData}></Profile>
-
-                        <Button title="Add Task" onPress={() => {navigation.navigate('TaskForm', {id: userData.id})}}/>
+                        <TouchableOpacity style={styles.buttonWrapper} title="Add Task" onPress={() => {navigation.navigate('TaskForm', {id: userData.id})}}>
+                            <Text style={styles.buttonText}>+</Text>
+                        </TouchableOpacity>
 
                         <View>
                             <TaskList tasks={taskData} onPressFunction={markComplete} onPressFunctionTwo={deleteTask}/>
@@ -100,5 +102,19 @@ const styles = StyleSheet.create({
     loadingIndicator: {
         alignContent: 'center',
         paddingTop: '50%'
+    },
+
+    buttonWrapper:{
+        backgroundColor: colors.auxiliary,
+        borderRadius: 12,
+        marginLeft: '6%',
+        marginRight: '6%'
+    },
+
+    buttonText: {
+        color: 'white',
+        fontSize: 24,
+        padding: '2%',
+        textAlign: 'center'
     }
 })
