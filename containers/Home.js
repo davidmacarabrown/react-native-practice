@@ -66,7 +66,7 @@ const Home = ({navigation}) => {
     useEffect(() => {
         loadUserData(userId)
         loadTaskData(userId)
-    }, [taskData])
+    }, [])
 
     return(
         <View>
