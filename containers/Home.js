@@ -36,34 +36,6 @@ const Home = ({navigation}) => {
         .catch((error) => alert(error))
     }
 
-    const addTask =() => {
-
-        console.log(newTaskName, newTaskDescription)
-
-        const payload = {
-            "name": newTaskName,
-            "description": newTaskDescription
-        }
-
-        if (newTaskName && newTaskDescription){
-
-            fetch('http://10.0.2.2:8080/users/' + userId.toString() + '/tasks', {
-
-                method: 'POST',
-                headers: {"Content-Type": "application/json"},
-                body: JSON.stringify(payload)
-            })
-                .then((response) => response.json())
-                .then((json) => setTasks(json))
-
-                setNewTaskDescription(null)
-                setNewTaskName(null)
-
-            } else {
-                alert("Please complete all fields.")
-            }
-    }
-
     const markComplete = (taskId) => {
 
         const filter = (data) => {
@@ -84,29 +56,6 @@ const Home = ({navigation}) => {
         .then((response) => response.json())
         .then((json) => setTaskData(json))
         .catch((error) => alert(error))
-    }
-
-    const saveTask = (name, description) => {
-
-        console.log(name, description);
-
-        const payload = {
-            "name": name,
-            "description": description
-        }
-
-        if (name && description){
-
-            fetch('http://10.0.2.2:8080/users/' + id.toString() + '/tasks', {
-
-                method: 'POST',
-                headers: {"Content-Type": "application/json"},
-                body: JSON.stringify(payload)
-            })
-
-            } else {
-                alert("Please complete all fields.")
-            }
     }
 
     useEffect(() => {
