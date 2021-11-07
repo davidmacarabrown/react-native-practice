@@ -4,66 +4,62 @@ import {Dimensions, Text, TouchableOpacity, Feather, Image, View, SafeAreaView, 
 export default function Profile ({props}) {
 
     return(
-            <View>
+            <View style={styles.profileWrapper}>
 
-                <ImageBackground source={require('../assets/images/smiley-g55c246914_1280.png')} style={styles.backgroundImage}>
+                <Image source={require('../assets/images/avatar.jpg')} style={styles.avatarImage}/>
+
+                <View style={styles.infoContainer}>
 
                     <View>
                         <Text style={styles.textLarge}>{props.username}</Text>
                     </View>
 
-                    <View style={styles.infoContainer}>
-
-                        <View style={styles.levelContainer}>
-                            <Text style={styles.textSmall}>Level</Text>
-                            <Text style={styles.textLarge}>{props.level}</Text>
-                        </View>
-
-                        <View style={styles.xpContainer}>
-                            <Text style={styles.textSmall}>XP</Text>
-                            <Text style={styles.textLarge}>{props.currentXp}/{props.maximumXp}</Text>
-                        </View>
-
-                        <View style={styles.healthContainer}>
-                            <Text style={styles.textSmall}>Health</Text>
-                            <Text style={styles.textLarge}>{props.health}</Text>
-                        </View>
-
+                    <View style={styles.detailWrapper}>
+                        <Text style={styles.textSmall}>XP: </Text>
+                        <Text style={styles.textSmall}>{props.currentXp}/{props.maximumXp}</Text>
                     </View>
 
-                </ImageBackground>
+                    <View style={styles.detailWrapper}>
+                        <Text style={styles.textSmall}>Lvl: </Text>
+                        <Text style={styles.textSmall}>{props.level}</Text>
+                    </View>
 
+                </View>
+                
             </View>
     )
 }
 
 const styles = StyleSheet.create({
 
-    backgroundImage:{
+    profileWrapper:{
+        width: '95%',
+        height: '19%',
+        flexDirection: 'row',
+        alignItems: 'flex-start'
+    },
+
+    avatarImage:{
+        flex: 1,
+        resizeMode: 'center',
         width: '100%',
-        aspectRatio: 1,
-        flexDirection: 'column',
-        justifyContent: 'space-between'
+        height: '100%',
+        marginLeft: '4%',
+        marginRight: '4%'
+    },
+
+    detailWrapper:{
+        flex: 1,
+        flexDirection: 'row',
+        alignContent: 'center'
     },
     
     infoContainer:{
-        position: 'absolute',
-        bottom: 0,
         flex: 1,
-        flexDirection: 'row',
-        justifyContent: 'flex-start'
-    },
-
-    levelContainer:{
-        flex: 1
-    },
-
-    xpContainer: {
-        flex: 1
-    },
-
-    healthContainer: {
-        flex: 1
+        flexDirection: 'column',
+        justifyContent: 'center',
+        alignItems: 'flex-start',
+        marginTop: '5%'
     },
     
     textSmall:{
@@ -77,6 +73,7 @@ const styles = StyleSheet.create({
         fontFamily:'Raleway-Bold',
         fontSize:32,
         color:'purple',
-        textAlign: 'center'
+        textAlign: 'center',
+        marginBottom: '10%'
     }
 })  

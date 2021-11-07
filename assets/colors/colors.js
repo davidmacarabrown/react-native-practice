@@ -1,7 +1,6 @@
 // this will be an object
 const colors = { 
-    background:'#5C58B6',
-    backgroundLight:'#FEFDF3',
+    background:'#EBEAEF',
     textDark:'#0F0F0F',
     textLight:'#AFA0E9',
     primary:'#7459FF',

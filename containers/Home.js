@@ -14,6 +14,7 @@ import {
 
 import Profile from './Profile'
 import TaskList from '../components/TaskList'
+import colors from '../assets/colors/colors';
 
 const Home = ({navigation}) => {
 
@@ -26,7 +27,7 @@ const Home = ({navigation}) => {
         fetch('http://10.0.2.2:8080/users/' + userId.toString() + '/')
         .then((response) => response.json())
         .then((json)=> setUserData(json))
-        .catch((error) => alert("Service Unavailable"))
+        .catch((error) => console.error(error))
     }
 
     const loadTaskData = () => {
@@ -47,7 +48,7 @@ const Home = ({navigation}) => {
             method: 'PATCH'
         }).then((response) => response.json())
         .then((json) => filter(json))
-        .catch((error) => alert("Service Unavailable"))
+        .catch((error) => console.error(error))
     };
 
     const deleteTask = (taskId) => {
@@ -55,7 +56,7 @@ const Home = ({navigation}) => {
             method: 'DELETE'})
         .then((response) => response.json())
         .then((json) => setTaskData(json))
-        .catch((error) => alert("Service Unavailable"))
+        .catch((error) => console.error(error))
     }
 
     const refresh = () => {
@@ -69,14 +70,14 @@ const Home = ({navigation}) => {
     }, [])
 
     return(
-        <View>
+        <View style={{backgroundColor: colors.background}}>
                 {userData === {} ? 
                 <View style={styles.loadingIndicator}>
                     <ActivityIndicator size="large" />
                     <Button title="Retry" onPress={refresh}/>
                 </View>
                 :
-                <View>
+                <ScrollView>
 
                         <Profile props={userData}></Profile>
 
@@ -85,7 +86,7 @@ const Home = ({navigation}) => {
                         <View>
                             <TaskList tasks={taskData} onPressFunction={markComplete} onPressFunctionTwo={deleteTask}/>
                         </View>
-                </View>
+                </ScrollView>
                 }
                 
         </View>
