@@ -126,7 +126,7 @@ const Home = ({navigation}) => {
                 </SafeAreaView>
                 }
                 <View>
-                    <Button title="Add Task" onPress={() => {navigation.navigate('TaskForm', {id: userData.id, save: addTask})}}/>
+                    <Button title="Add Task" onPress={() => {navigation.navigate('TaskForm', {id: userData.id})}}/>
                 </View>
                 <SafeAreaView>
                     <TaskList tasks={taskData} onPressFunction={markComplete} onPressFunctionTwo={deleteTask}/>

@@ -1,23 +1,29 @@
 import React, {useState} from 'react';
-import {Button, Text, TextInput, View} from 'react-native';
+import {ActivityIndicator, Button, Text, TextInput, View} from 'react-native';
 
 const TaskForm = ({navigation, route}) => {
 
-    const [name, setName] = useState(null);
-    const [description, setDescription] = useState(null);
+    const [taskName, setTaskName] = useState("");
+    const [description, setDescription] = useState("");
+    const [loadingState, setLoadingState] = useState(false);
 
     const id = route.params.id;
 
-    const saveTask = (name, description) => {
+    const resetFields = () => {
+        setDescription("");
+        setTaskName("");
+    }
 
-        console.log(name, description);
-
+    const saveTask = () => {
+       
         const payload = {
-            "name": name,
-            "description": description
+            name: taskName,
+             description
         }
 
-        if (name && description){
+        if (taskName && description){
+            
+            setLoadingState(true);
 
             fetch('http://10.0.2.2:8080/users/' + id.toString() + '/tasks', {
 
@@ -25,10 +31,15 @@ const TaskForm = ({navigation, route}) => {
                 headers: {"Content-Type": "application/json"},
                 body: JSON.stringify(payload)
             })
-
-                setDescription(null);
-                setName(null);
-                goHome()
+            .then((response) => {
+                console.log(response.status)
+                if (response.status === 201){
+                    alert("Task Saved!");
+                    resetFields();
+                }
+            })
+            .catch(error => alert("Failed To Save"))
+            .finally(setLoadingState(false));
 
             } else {
                 alert("Please complete all fields.")
@@ -41,9 +52,17 @@ const TaskForm = ({navigation, route}) => {
 
     return(
         <View>
-            <TextInput placeholder={"Task Name"} onChangeText={(value) => setName(value)}/>
-            <TextInput placeholder={"Description"} onChangeText={(value => setDescription(value))} />
-            <Button title={"Save Task"} onPress={saveTask}/>
+            { loadingState ? 
+            <View>
+                <ActivityIndicator size="large"/>
+            </View>
+            : null }
+            <View>
+                <TextInput placeholder={"Task Name"} onChangeText={setTaskName} value={taskName}/>
+                <TextInput placeholder={"Description"} onChangeText={setDescription} value={description}/>
+            </View>
+            
+            <Button title={"Save Task"} onPress={saveTask} disabled={loadingState}/>
             <Button title={"Back"} onPress={goHome}/>
         </View>
     )
