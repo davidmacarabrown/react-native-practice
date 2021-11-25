@@ -1,8 +1,11 @@
-import React, {useState} from 'react';
+import React, {useContext, useState} from 'react';
 import {ActivityIndicator, Button, Text, TextInput, View} from 'react-native';
+import {Context} from '../containers/Store';
 
 const TaskForm = ({navigation, route}) => {
-
+    
+    const {tasks} = useContext(Context)
+    const [taskData, setTaskData] = tasks
     const [taskName, setTaskName] = useState("");
     const [description, setDescription] = useState("");
     const [loadingState, setLoadingState] = useState(false);
@@ -36,10 +39,9 @@ const TaskForm = ({navigation, route}) => {
                 body: JSON.stringify(payload)
             })
             .then((response) => {
-                console.log(response.status)
-                if (response.status === 201){
-                    alert("Task Saved!");
-                    resetFields();
+                if (response.status === 201) {
+                    alert("Task Saved!")
+                    resetFields()
                 }
             })
             .catch(error => alert("Failed To Save"))

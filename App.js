@@ -23,39 +23,42 @@ import {
 import Home from './containers/Home';
 import Splash from './containers/Splash'
 import TaskForm from './components/TaskForm';
+import Store from './containers/Store';
 
 const App = () => {
 
   const Stack = createNativeStackNavigator();
 
   return (
-          <NavigationContainer>
-            <Stack.Navigator>
+          <Store>
+            <NavigationContainer>
+              <Stack.Navigator>
 
-              <Stack.Screen
-              name="Splash"
-              component={Splash}
-              options = {{
-                headerShown:false
-              }}
-              />
-            
-              <Stack.Screen
-              name="Home"
-              component={Home}
-              options = {{
-                headerShown:false
-              }}
-              />
-
-              <Stack.Screen
-              name="TaskForm"
-              component={TaskForm}
-              options={{headerShown: false}}
-              />
+                <Stack.Screen
+                name="Splash"
+                component={Splash}
+                options = {{
+                  headerShown:false
+                }}
+                />
               
-            </Stack.Navigator>
-        </NavigationContainer>
+                <Stack.Screen
+                name="Home"
+                component={Home}
+                options = {{
+                  headerShown:false
+                }}
+                />
+
+                <Stack.Screen
+                name="TaskForm"
+                component={TaskForm}
+                options={{headerShown: false}}
+                />
+                
+              </Stack.Navigator>
+          </NavigationContainer>
+        </Store>
   );
 };
 

@@ -1,5 +1,5 @@
 import React from 'react';
-import { useState, useEffect } from 'react';
+import { useState, useContext, useEffect } from 'react';
 import {
     ActivityIndicator,
     Button,
@@ -16,23 +16,17 @@ import {
 import Profile from './Profile'
 import TaskList from '../components/TaskList'
 import colors from '../assets/colors/colors';
+import { Context } from './Store';
 
 const Home = ({navigation}) => {
 
-    const [userData, setUserData] = useState({})
-    const [taskData, setTaskData] = useState([])
+    const {user, tasks} = useContext(Context)
 
-    const userId = 1;
-
-    const loadUserData = () => {
-        fetch('http://10.0.2.2:8080/users/' + userId.toString() + '/')
-        .then((response) => response.json())
-        .then((json)=> setUserData(json))
-        .catch((error) => console.error(error))
-    }
+    const [userData, setUserData] = user
+    const [taskData, setTaskData] = tasks
 
     const loadTaskData = () => {
-        fetch('http://10.0.2.2:8080/users/' + userId.toString() + '/tasks')
+        fetch('http://10.0.2.2:8080/users/' + userData.id.toString() + '/tasks')
         .then((response) => response.json())
         .then((json) => setTaskData(json))
         .catch((error) => console.error(error))
@@ -45,7 +39,7 @@ const Home = ({navigation}) => {
             setTaskData(data.tasks)
         }
 
-        fetch('http://10.0.2.2:8080/users/'+ userId.toString() +'/tasks/' + taskId.toString() + '/markcomplete', {
+        fetch('http://10.0.2.2:8080/users/'+ userData.id.toString() +'/tasks/' + taskId.toString() + '/markcomplete', {
             method: 'PATCH'
         }).then((response) => response.json())
         .then((json) => filter(json))
@@ -53,21 +47,15 @@ const Home = ({navigation}) => {
     };
 
     const deleteTask = (taskId) => {
-        fetch('http://10.0.2.2:8080/users/'+ userId.toString() +'/tasks/' + taskId.toString()+ '/', {
+        fetch('http://10.0.2.2:8080/users/'+ userData.id.toString() +'/tasks/' + taskId.toString()+ '/', {
             method: 'DELETE'})
         .then((response) => response.json())
         .then((json) => setTaskData(json))
         .catch((error) => console.error(error))
     }
 
-    const refresh = () => {
-        loadUserData(userId)
-        loadTaskData(userId)
-    }
-
     useEffect(() => {
-        loadUserData(userId)
-        loadTaskData(userId)
+        loadTaskData()
     }, [])
 
     return(
