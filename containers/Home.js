@@ -1,23 +1,21 @@
 import React from 'react';
-import { useState, useContext, useEffect } from 'react';
+import { useContext, useEffect } from 'react';
 import {
     ActivityIndicator,
     Button,
-    SafeAreaView,
     ScrollView,
-    StatusBar,
     StyleSheet,
     Text,
     TouchableOpacity,
-    useColorScheme,
     View,
   } from 'react-native';
 
-  import { useIsFocused } from '@react-navigation/native';
+import { useIsFocused } from '@react-navigation/native';
 
 import Profile from './Profile'
 import TaskList from '../components/TaskList'
 import colors from '../assets/colors/colors';
+
 import { Context } from './Store';
 
 const Home = ({navigation}) => {
