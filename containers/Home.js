@@ -13,12 +13,16 @@ import {
     View,
   } from 'react-native';
 
+  import { useIsFocused } from '@react-navigation/native';
+
 import Profile from './Profile'
 import TaskList from '../components/TaskList'
 import colors from '../assets/colors/colors';
 import { Context } from './Store';
 
 const Home = ({navigation}) => {
+
+    const isFocused = useIsFocused();
 
     const {user, tasks} = useContext(Context)
 
@@ -56,7 +60,7 @@ const Home = ({navigation}) => {
 
     useEffect(() => {
         loadTaskData()
-    }, [])
+    }, [isFocused])
 
     return(
         <View style={{backgroundColor: colors.background}}>
