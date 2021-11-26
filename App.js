@@ -1,5 +1,4 @@
 import React from 'react';
-import { useEffect, useState } from 'react';
 import { NavigationContainer} from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import {
@@ -41,7 +40,7 @@ const App = () => {
                   headerShown:false
                 }}
                 />
-              
+
                 <Stack.Screen
                 name="Home"
                 component={Home}
@@ -55,8 +54,8 @@ const App = () => {
                 component={TaskForm}
                 options={{headerShown: false}}
                 />
-                
-              </Stack.Navigator>
+
+            </Stack.Navigator>
           </NavigationContainer>
         </Store>
   );

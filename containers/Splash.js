@@ -9,7 +9,6 @@ const Splash = ({navigation}) => {
     const {user, tasks} = useContext(Context)
 
     const [userData, setUserData] = user
-    const [taskData, setTaskData] = tasks
 
     const [dataLoading, setDataLoading] = useState(true)
 

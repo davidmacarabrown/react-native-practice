@@ -1,42 +1,32 @@
 import React from 'react';
-import {Dimensions, Text, TouchableOpacity, Feather, Image, View, SafeAreaView, StyleSheet, ImageBackground} from 'react-native';
+import { Dimensions, Text,  Image, View, StyleSheet } from 'react-native';
 import colors from '../assets/colors/colors';
 
 const profileHeight = Dimensions.get("screen").height / 5
 
 export default function Profile ({props}) {
 
-    
-
     return(
             <View style={styles.profileWrapper}>
-
                 <Image source={require('../assets/images/avatar.jpg')} style={styles.avatarImage}/>
-
                 <View style={styles.infoContainer}>
-
                     <View>
                         <Text style={styles.textLarge}>{props.username}</Text>
                     </View>
-
                     <View style={styles.detailWrapper}>
                         <Text style={styles.textSmall}>XP: </Text>
                         <Text style={styles.textSmall}>{props.currentXp}/{props.maximumXp}</Text>
                     </View>
-
                     <View style={styles.detailWrapper}>
                         <Text style={styles.textSmall}>Lvl: </Text>
                         <Text style={styles.textSmall}>{props.level}</Text>
                     </View>
-
                 </View>
-                
             </View>
     )
 }
 
 const styles = StyleSheet.create({
-
     profileWrapper:{
         height:profileHeight,
         flexDirection: 'row',

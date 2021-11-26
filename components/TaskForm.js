@@ -1,5 +1,5 @@
 import React, {useContext, useState} from 'react';
-import {ActivityIndicator, Button, Text, TextInput, View} from 'react-native';
+import {ActivityIndicator, Button, TextInput, View} from 'react-native';
 import {Context} from '../containers/Store';
 
 const TaskForm = ({navigation, route}) => {
@@ -29,7 +29,6 @@ const TaskForm = ({navigation, route}) => {
         }
 
         if (taskName && description){
-            
             setLoadingState(true);
 
             fetch('http://10.0.2.2:8080/users/' + id.toString() + '/tasks', {

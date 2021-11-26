@@ -7,17 +7,12 @@ const TaskItem = (props) => {
 
     return(
             <View>
-                
                 <View style={styles.taskItem}>
-
                     <View style={styles.textContainer}>
                         <Text style={styles.taskName}>{props.item.name}</Text>
                         <Text style={styles.taskDescription}>{props.item.description}</Text>
                     </View>
-                    
-                    
                     <View style={styles.taskButtonContainer}>
-
                         <TouchableOpacity>
                             <Feather 
                                 name="edit"
@@ -43,13 +38,11 @@ const TaskItem = (props) => {
                                 />
                         }
                         </View>
-
                         <TouchableOpacity onPress={props.deleteTask}>
                             <Feather name="x-circle"
                                     size={28}
-                                    color={"#b53833"}
-                                        
-                            />
+                                    color={"#b53833"}      
+                                />
                         </TouchableOpacity>
                     </View>
                 </View>

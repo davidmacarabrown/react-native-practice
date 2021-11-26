@@ -12,8 +12,8 @@ import {
 
 import { useIsFocused } from '@react-navigation/native';
 
-import Profile from './Profile'
-import TaskList from '../components/TaskList'
+import Profile from './Profile';
+import TaskList from '../components/TaskList';
 import colors from '../assets/colors/colors';
 
 import { Context } from './Store';
@@ -22,8 +22,7 @@ const Home = ({navigation}) => {
 
     const isFocused = useIsFocused();
 
-    const {user, tasks} = useContext(Context)
-
+    const {user, tasks} = useContext(Context);
     const [userData, setUserData] = user
     const [taskData, setTaskData] = tasks
 
@@ -35,12 +34,10 @@ const Home = ({navigation}) => {
     }
 
     const markComplete = (taskId) => {
-
         const filter = (data) => {
             setUserData(data.user)
             setTaskData(data.tasks)
         }
-
         fetch('http://10.0.2.2:8080/users/'+ userData.id.toString() +'/tasks/' + taskId.toString() + '/markcomplete', {
             method: 'PATCH'
         }).then((response) => response.json())
@@ -62,25 +59,24 @@ const Home = ({navigation}) => {
 
     return(
         <View style={{backgroundColor: colors.background}}>
-                {userData === {} ? 
-                <View style={styles.loadingIndicator}>
-                    <ActivityIndicator size="large" />
-                    <Button title="Retry" onPress={refresh}/>
+            {userData === {} ? 
+            <View style={styles.loadingIndicator}>
+                <ActivityIndicator size="large" />
+                <Button title="Retry" onPress={refresh}/>
+            </View>
+            :
+            <ScrollView>
+                <Profile props={userData} />
+
+                <TouchableOpacity style={styles.buttonWrapper} title="Add Task" onPress={() => {navigation.navigate('TaskForm', {id: userData.id})}}>
+                    <Text style={styles.buttonText}>+</Text>
+                </TouchableOpacity>
+
+                <View>
+                    <TaskList tasks={taskData} onPressFunction={markComplete} onPressFunctionTwo={deleteTask}/>
                 </View>
-                :
-                <ScrollView>
-                        <Profile props={userData} />
-
-                        <TouchableOpacity style={styles.buttonWrapper} title="Add Task" onPress={() => {navigation.navigate('TaskForm', {id: userData.id})}}>
-                            <Text style={styles.buttonText}>+</Text>
-                        </TouchableOpacity>
-
-                        <View>
-                            <TaskList tasks={taskData} onPressFunction={markComplete} onPressFunctionTwo={deleteTask}/>
-                        </View>
-                </ScrollView>
-                }
-                
+            </ScrollView>
+            }
         </View>
     )
 }
