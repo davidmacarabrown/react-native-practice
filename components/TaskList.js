@@ -15,6 +15,7 @@ const TaskList =  ({ tasks, onPressFunction, onPressFunctionTwo }) => {
                 </View>
         )
     }
+    
     return(
             <FlatList 
                 style={Styles.tasksWrapper}

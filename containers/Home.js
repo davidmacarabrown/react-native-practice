@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import {
     ActivityIndicator,
     Button,
@@ -22,7 +22,7 @@ const Home = ({ navigation }) => {
 
     const {user, tasks} = useContext(Context);
     const [userData, setUserData] = user
-    const [taskData, setTaskData] = tasks
+    const [taskData, setTaskData] = useState([])
 
     const loadTaskData = (userId) => {
         fetch('http://10.0.2.2:8080/users/' + userId.toString() + '/tasks')
