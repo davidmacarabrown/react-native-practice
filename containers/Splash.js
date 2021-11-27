@@ -3,6 +3,7 @@ import {Context} from './Store';
 
 import {Button, View, Text} from 'react-native';
 import colors from '../assets/colors/colors'
+import StyledButton from '../components/StyledButton';
 
 const Splash = ({navigation}) => {
 
@@ -26,9 +27,18 @@ const Splash = ({navigation}) => {
         loadUserData()
     }, [])
 
+    const enterApp = () => {
+        navigation.navigate("Home");
+        console.log("hello mate")
+    }
+
     return(
         <View style={{backgroundColor: colors.background}}>
             <Text>Splash Screen</Text>
+            <StyledButton 
+                text="Continue!"
+                callBack={enterApp}
+            />
             <Button disabled={dataLoading} title="Continue" onPress={() => navigation.navigate("Home")}></Button>
         </View>
     )

@@ -26,8 +26,9 @@ const Home = ({navigation}) => {
     const [userData, setUserData] = user
     const [taskData, setTaskData] = tasks
 
-    const loadTaskData = () => {
-        fetch('http://10.0.2.2:8080/users/' + userData.id.toString() + '/tasks')
+    const loadTaskData = (userId) => {
+        console.log("+++++++++", userData)
+        fetch('http://10.0.2.2:8080/users/' + userId.toString() + '/tasks')
         .then((response) => response.json())
         .then((json) => setTaskData(json))
         .catch((error) => console.error(error))
@@ -54,7 +55,7 @@ const Home = ({navigation}) => {
     }
 
     useEffect(() => {
-        loadTaskData()
+        loadTaskData(1)
     }, [isFocused])
 
     return(
