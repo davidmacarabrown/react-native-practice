@@ -19,9 +19,8 @@ import { Context } from './Store';
 const Home = ({ navigation }) => {
 
     const isFocused = useIsFocused();
-
-    const {user, tasks} = useContext(Context);
-    const [userData, setUserData] = user
+    
+    const [userData, setUserData] = useContext(Context)
     const [taskData, setTaskData] = useState([])
 
     const loadTaskData = (userId) => {

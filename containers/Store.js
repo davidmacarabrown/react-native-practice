@@ -7,7 +7,7 @@ const Store = ({ children }) => {
     const [userData, setUserData] = useState({});
 
     return(
-        <Context.Provider value={{ user: [userData, setUserData]}}>
+        <Context.Provider value={[userData, setUserData]}>
             {children}
         </Context.Provider>
     )

@@ -1,4 +1,4 @@
-import React, {useContext, useState} from 'react';
+import React, { useState } from 'react';
 import {ActivityIndicator, StyleSheet, TextInput, View} from 'react-native';
 
 import StyledButton from './StyledButton';
@@ -39,6 +39,7 @@ const TaskForm = ({navigation, route}) => {
             })
             .then((response) => {
                 if (response.status === 201) {
+                    //TODO: Clean up the ugly alerts to something less intrusive
                     alert("Task Saved!")
                     resetFields()
                 }
@@ -83,7 +84,6 @@ const Styles = StyleSheet.create({
     buttonWrapper: {
         display: 'flex',
         flexDirection: 'column',
-        
     }
 })
 export default TaskForm;

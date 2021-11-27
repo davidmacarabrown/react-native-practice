@@ -7,9 +7,9 @@ import StyledButton from '../components/StyledButton';
 
 const Splash = ({navigation}) => {
 
-    const {user, tasks} = useContext(Context)
+    // const {user, tasks} = useContext(Context)
 
-    const [userData, setUserData] = user
+    const [userData, setUserData] = useContext(Context)
 
     const [dataLoading, setDataLoading] = useState(true)
 
