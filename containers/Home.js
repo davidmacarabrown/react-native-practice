@@ -19,9 +19,18 @@ import { Context } from './Store';
 const Home = ({ navigation }) => {
 
     const isFocused = useIsFocused();
+
+    const userId = 1;
     
     const [userData, setUserData] = useContext(Context)
     const [taskData, setTaskData] = useState([])
+
+    const loadUserData = (userId) => {
+        fetch('http://10.0.2.2:8080/users/' + userId.toString() + '/')
+        .then((response) => response.json())
+        .then((json) => setUserData(json))
+        .catch((error) => console.error(error))
+    }
 
     const loadTaskData = (userId) => {
         fetch('http://10.0.2.2:8080/users/' + userId.toString() + '/tasks')
@@ -50,8 +59,13 @@ const Home = ({ navigation }) => {
         .catch((error) => console.error(error))
     }
 
+    const loadData = () => {
+        loadUserData(userId)
+        loadTaskData(userId)
+    }
+
     useEffect(() => {
-        loadTaskData(userData.id)
+        loadData()
     }, [isFocused])
 
     const taskFormLoad = () => {
@@ -60,10 +74,10 @@ const Home = ({ navigation }) => {
 
     return(
         <View style={{backgroundColor: colors.background}}>
-            {userData === {} ? 
+            {!userData ? 
             <View style={styles.loadingIndicator}>
                 <ActivityIndicator size="large" />
-                <Button title="Retry" onPress={refresh}/>
+                <StyledButton text="Retry" callBack={loadData} color={colors.secondary} isDisabled={false}/>
             </View>
             :
             <ScrollView>
@@ -72,6 +86,7 @@ const Home = ({ navigation }) => {
                     text="+"
                     callBack={taskFormLoad}
                     color={colors.auxiliary}
+                    isDisabled={false}
                 />
                 <View>
                     <TaskList tasks={taskData} onPressFunction={markComplete} onPressFunctionTwo={deleteTask}/>
@@ -86,7 +101,7 @@ export default Home;
 
 const styles = StyleSheet.create({
     loadingIndicator: {
-        alignContent: 'center',
-        paddingTop: '50%'
+        paddingTop: '30%',
+        paddingBottom: '30%'
     }
 })

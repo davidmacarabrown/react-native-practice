@@ -4,7 +4,7 @@ export const Context = React.createContext();
 
 const Store = ({ children }) => {
 
-    const [userData, setUserData] = useState({});
+    const [userData, setUserData] = useState(null);
 
     return(
         <Context.Provider value={[userData, setUserData]}>

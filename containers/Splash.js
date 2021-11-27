@@ -7,26 +7,6 @@ import StyledButton from '../components/StyledButton';
 
 const Splash = ({navigation}) => {
 
-    // const {user, tasks} = useContext(Context)
-
-    const [userData, setUserData] = useContext(Context)
-
-    const [dataLoading, setDataLoading] = useState(true)
-
-    const userId = 1;
-
-    const loadUserData = () => {
-        fetch('http://10.0.2.2:8080/users/' + userId.toString() + '/')
-        .then((response) => response.json())
-        .then((json) => setUserData(json))
-        .catch((error) => console.error(error))
-        .finally(setDataLoading(false))
-    }
-
-    useEffect(() => {
-        loadUserData()
-    }, [])
-
     const enterApp = () => {
         navigation.navigate("Home");
     }
@@ -38,6 +18,7 @@ const Splash = ({navigation}) => {
                 text="Continue!"
                 callBack={enterApp}
                 color={colors.secondary}
+                isDisabled={false}
             />
         </View>
     )

@@ -1,8 +1,7 @@
 import React from 'react';
 import { StyleSheet, TouchableOpacity, View, Text }  from 'react-native';
 
-const StyledButton = ({ text, callBack, color }) => {
-
+const StyledButton = ({ text, callBack, color, isDisabled }) => {
     return(
         <View style={{
             backgroundColor: color,
@@ -11,7 +10,7 @@ const StyledButton = ({ text, callBack, color }) => {
             marginRight: '6%',
             marginBottom: '5%'
             }}>
-            <TouchableOpacity onPress={callBack}>
+            <TouchableOpacity onPress={callBack} disabled={isDisabled}>
                 <Text style={Styles.buttonText}>{text}</Text>
             </TouchableOpacity>
         </View>
