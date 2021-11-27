@@ -4,9 +4,7 @@ import colors from '../assets/colors/colors';
 import TaskItem from './TaskItem';
 
 const TaskList =  ({ tasks, onPressFunction, onPressFunctionTwo }) => {
-
     const renderItem = ({item}) => {
-
         return(
                 <View style={Styles.items}>
                     <TaskItem 
@@ -17,7 +15,6 @@ const TaskList =  ({ tasks, onPressFunction, onPressFunctionTwo }) => {
                 </View>
         )
     }
-
     return(
             <FlatList 
                 style={Styles.tasksWrapper}
@@ -29,13 +26,11 @@ const TaskList =  ({ tasks, onPressFunction, onPressFunctionTwo }) => {
 }
 
 const Styles = StyleSheet.create({
-
     tasksWrapper:{
         paddingHorizontal: '5%',
         borderRadius: 10,
         color: colors.primary
     },
-    
     items:{
         paddingBottom: '5%'
     }

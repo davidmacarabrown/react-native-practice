@@ -1,12 +1,9 @@
-import React from 'react';
-import { useContext, useEffect } from 'react';
+import React, { useContext, useEffect } from 'react';
 import {
     ActivityIndicator,
     Button,
     ScrollView,
     StyleSheet,
-    Text,
-    TouchableOpacity,
     View,
   } from 'react-native';
 
@@ -19,7 +16,7 @@ import colors from '../assets/colors/colors';
 
 import { Context } from './Store';
 
-const Home = ({navigation}) => {
+const Home = ({ navigation }) => {
 
     const isFocused = useIsFocused();
 
@@ -28,7 +25,6 @@ const Home = ({navigation}) => {
     const [taskData, setTaskData] = tasks
 
     const loadTaskData = (userId) => {
-        console.log("+++++++++", userData)
         fetch('http://10.0.2.2:8080/users/' + userId.toString() + '/tasks')
         .then((response) => response.json())
         .then((json) => setTaskData(json))
@@ -56,7 +52,7 @@ const Home = ({navigation}) => {
     }
 
     useEffect(() => {
-        loadTaskData(1)
+        loadTaskData(userData.id)
     }, [isFocused])
 
     const taskFormLoad = () => {
@@ -73,7 +69,6 @@ const Home = ({navigation}) => {
             :
             <ScrollView>
                 <Profile props={userData} />
-                
                 <StyledButton 
                     text="+"
                     callBack={taskFormLoad}
@@ -91,7 +86,6 @@ const Home = ({navigation}) => {
 export default Home;
 
 const styles = StyleSheet.create({
-
     loadingIndicator: {
         alignContent: 'center',
         paddingTop: '50%'

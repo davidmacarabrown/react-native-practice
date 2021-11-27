@@ -1,4 +1,3 @@
-// this will be an object
 const colors = { 
     background:'#EBEAEF',
     textDark:'#0F0F0F',
@@ -12,5 +11,3 @@ const colors = {
 };
 
 export default colors;
-
-

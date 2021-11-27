@@ -1,16 +1,16 @@
 import React from 'react';
-import {StyleSheet, View, Text, TouchableOpacity} from 'react-native';
+import { StyleSheet, View, Text, TouchableOpacity } from 'react-native';
 import Feather from 'react-native-vector-icons/Feather';
 import colors from '../assets/colors/colors';
 
-const TaskItem = (props) => {
+const TaskItem = ({ item, markComplete, deleteTask }) => {
 
     return(
             <View>
                 <View style={styles.taskItem}>
                     <View style={styles.textContainer}>
-                        <Text style={styles.taskName}>{props.item.name}</Text>
-                        <Text style={styles.taskDescription}>{props.item.description}</Text>
+                        <Text style={styles.taskName}>{item.name}</Text>
+                        <Text style={styles.taskDescription}>{item.description}</Text>
                     </View>
                     <View style={styles.taskButtonContainer}>
                         <TouchableOpacity>
@@ -22,8 +22,8 @@ const TaskItem = (props) => {
                         </TouchableOpacity>
 
                         <View style={styles.complete}>
-                        {!props.item.status ?
-                            <TouchableOpacity onPress={props.markComplete}>
+                        {!item.status ?
+                            <TouchableOpacity onPress={markComplete}>
                                     <Feather
                                         name="check-circle"
                                         size={50}
@@ -38,7 +38,7 @@ const TaskItem = (props) => {
                                 />
                         }
                         </View>
-                        <TouchableOpacity onPress={props.deleteTask}>
+                        <TouchableOpacity onPress={deleteTask}>
                             <Feather name="x-circle"
                                     size={28}
                                     color={"#b53833"}      

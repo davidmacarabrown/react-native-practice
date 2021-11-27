@@ -1,11 +1,16 @@
 import React from 'react';
-import {StyleSheet, TouchableOpacity, View, Text} from 'react-native';
-import colors from '../assets/colors/colors';
+import { StyleSheet, TouchableOpacity, View, Text }  from 'react-native';
 
 const StyledButton = ({ text, callBack, color }) => {
 
     return(
-        <View style={Styles.buttonWrapper}>
+        <View style={{
+            backgroundColor: color,
+            borderRadius: 12,
+            marginLeft: '6%',
+            marginRight: '6%',
+            marginBottom: '5%'
+            }}>
             <TouchableOpacity onPress={callBack}>
                 <Text style={Styles.buttonText}>{text}</Text>
             </TouchableOpacity>
@@ -14,15 +19,6 @@ const StyledButton = ({ text, callBack, color }) => {
 }
 
 const Styles = StyleSheet.create({
-    
-    buttonWrapper:{
-        backgroundColor: colors.auxiliary,
-        borderRadius: 12,
-        marginLeft: '6%',
-        marginRight: '6%',
-        marginBottom: '6%'
-    },
-
     buttonText: {
         color: 'white',
         fontSize: 24,

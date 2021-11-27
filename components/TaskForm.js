@@ -1,14 +1,11 @@
 import React, {useContext, useState} from 'react';
 import {ActivityIndicator, StyleSheet, TextInput, View} from 'react-native';
-import {Context} from '../containers/Store';
 
 import StyledButton from './StyledButton';
 import colors from '../assets/colors/colors';
 
 const TaskForm = ({navigation, route}) => {
     
-    const {tasks} = useContext(Context)
-    const [taskData, setTaskData] = tasks
     const [taskName, setTaskName] = useState("");
     const [description, setDescription] = useState("");
     const [loadingState, setLoadingState] = useState(false);
@@ -69,12 +66,12 @@ const TaskForm = ({navigation, route}) => {
                 <StyledButton 
                     text="Save Task"
                     callBack={saveTask}
-                    color={colors.primary}
+                    color={colors.auxiliary}
                 />
                 <StyledButton 
                     text={"Back"}
                     callBack={goHome}
-                    color={colors.primary}
+                    color={colors.secondary}
                 />
             </View>
         </View>

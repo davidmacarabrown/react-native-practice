@@ -1,7 +1,7 @@
-import React, {useContext, useEffect, useState} from 'react';
-import {Context} from './Store';
+import React, { useContext, useEffect, useState } from 'react';
+import { Context } from './Store';
 
-import {Button, View, Text} from 'react-native';
+import { View, Text } from 'react-native';
 import colors from '../assets/colors/colors'
 import StyledButton from '../components/StyledButton';
 
@@ -37,7 +37,7 @@ const Splash = ({navigation}) => {
             <StyledButton 
                 text="Continue!"
                 callBack={enterApp}
-                color={colors.auxiliary}
+                color={colors.secondary}
             />
         </View>
     )
