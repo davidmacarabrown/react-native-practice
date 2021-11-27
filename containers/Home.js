@@ -13,6 +13,7 @@ import {
 import { useIsFocused } from '@react-navigation/native';
 
 import Profile from './Profile';
+import StyledButton from '../components/StyledButton';
 import TaskList from '../components/TaskList';
 import colors from '../assets/colors/colors';
 
@@ -58,6 +59,10 @@ const Home = ({navigation}) => {
         loadTaskData(1)
     }, [isFocused])
 
+    const taskFormLoad = () => {
+        navigation.navigate('TaskForm', {id: userData.id})
+    }
+
     return(
         <View style={{backgroundColor: colors.background}}>
             {userData === {} ? 
@@ -68,11 +73,12 @@ const Home = ({navigation}) => {
             :
             <ScrollView>
                 <Profile props={userData} />
-
-                <TouchableOpacity style={styles.buttonWrapper} title="Add Task" onPress={() => {navigation.navigate('TaskForm', {id: userData.id})}}>
-                    <Text style={styles.buttonText}>+</Text>
-                </TouchableOpacity>
-
+                
+                <StyledButton 
+                    text="+"
+                    callBack={taskFormLoad}
+                    color={colors.auxiliary}
+                />
                 <View>
                     <TaskList tasks={taskData} onPressFunction={markComplete} onPressFunctionTwo={deleteTask}/>
                 </View>
@@ -89,19 +95,5 @@ const styles = StyleSheet.create({
     loadingIndicator: {
         alignContent: 'center',
         paddingTop: '50%'
-    },
-
-    buttonWrapper:{
-        backgroundColor: colors.auxiliary,
-        borderRadius: 12,
-        marginLeft: '6%',
-        marginRight: '6%'
-    },
-
-    buttonText: {
-        color: 'white',
-        fontSize: 24,
-        padding: '2%',
-        textAlign: 'center'
     }
 })

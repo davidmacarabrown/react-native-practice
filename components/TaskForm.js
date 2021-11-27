@@ -1,6 +1,9 @@
 import React, {useContext, useState} from 'react';
-import {ActivityIndicator, Button, TextInput, View} from 'react-native';
+import {ActivityIndicator, StyleSheet, TextInput, View} from 'react-native';
 import {Context} from '../containers/Store';
+
+import StyledButton from './StyledButton';
+import colors from '../assets/colors/colors';
 
 const TaskForm = ({navigation, route}) => {
     
@@ -62,11 +65,28 @@ const TaskForm = ({navigation, route}) => {
                 <TextInput placeholder={"Task Name"} onChangeText={setTaskName} value={taskName}/>
                 <TextInput placeholder={"Description"} onChangeText={setDescription} value={description}/>
             </View>
-            
-            <Button title={"Save Task"} onPress={saveTask} disabled={loadingState}/>
-            <Button title={"Back"} onPress={goHome}/>
+            <View style={Styles.buttonWrapper}>
+                <StyledButton 
+                    text="Save Task"
+                    callBack={saveTask}
+                    color={colors.primary}
+                />
+                <StyledButton 
+                    text={"Back"}
+                    callBack={goHome}
+                    color={colors.primary}
+                />
+            </View>
         </View>
     )
 }
 
+const Styles = StyleSheet.create({
+
+    buttonWrapper: {
+        display: 'flex',
+        flexDirection: 'column',
+        
+    }
+})
 export default TaskForm;

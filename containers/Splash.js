@@ -29,7 +29,6 @@ const Splash = ({navigation}) => {
 
     const enterApp = () => {
         navigation.navigate("Home");
-        console.log("hello mate")
     }
 
     return(
@@ -38,8 +37,8 @@ const Splash = ({navigation}) => {
             <StyledButton 
                 text="Continue!"
                 callBack={enterApp}
+                color={colors.auxiliary}
             />
-            <Button disabled={dataLoading} title="Continue" onPress={() => navigation.navigate("Home")}></Button>
         </View>
     )
 }
